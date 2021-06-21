@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+
+<head>
+    <title>My Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+   
+</head>
+
+<body>
+    <div class="main">
+        <h1>Registrierung</h1>
+        <p>Bitte tragen Sie Ihre Daten ein!</p>
+
+        <div>
+                <div class="row mt-3">
+
+                    <div class="col-5 border border-3 rounded ms-3" >
+
+                        <label mt-3 for="vname">Vorname:
+                            <input type="text" id="fname" name="FName">
+                        </label>
+
+                        <label for="zname">Zuname: 
+                            <input type="text" id="lname" name="LName">
+                        </label>
+                        <div>
+                            <label for="man">männlich</label>
+                            <input type="radio" id="man" name="Gender" value="0">
+                            <label for="woman">weiblich</label>
+                            <input type="radio" id="woman" name="Gender" value="1">
+                        </div>
+                        <div>
+                            <label>Alter: 
+                            </label>
+                            <label for="under">unter 18</label>
+                            <input type="radio" id="under" name="Age" value="0">
+                            <label for="over">mind. 18</label>
+                            <input type="radio" id="over" name="Age" value="1">
+                        </div>
+                        <input class="btn mb-2 mt-2" type="submit" value="senden" onclick="CheckInput()">    
+                    </div>
+                </div>
+             </div>
+             <div>
+                  <p id="display"></p>  
+             </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function CheckInput() {
+
+        let fname=document.getElementById("fname").value;
+        let lname=document.getElementById("lname").value;
+
+        let gender=CheckGender();
+        let age=CheckAge();
+        
+        if(fname!=="" && lname!=="" )
+        {
+            if(CheckName(fname) && CheckName(lname))
+            {
+                if(gender!=="" && age!=="")
+                {
+                        document.getElementById("display").innerHTML = "Ihre Angaben: " + fname +" "+ lname + ", " + gender + ", "+ age;
+                }
+                else
+                    alert("Altersangabe und/oder Geschlecht wählen!");
+            }
+            else
+            alert("Unzulässige Zeichen im Namen!")
+        }
+        else
+        alert("Vor- und Zuname müssen angegeben werden!");
+    }
+
+    function CheckGender()
+    {
+        let gender="";
+
+        if(document.getElementById("man").checked)
+                gender="männlich"
+
+        if (document.getElementById("woman").checked)
+                gender="weiblich"
+
+        return gender;
+    }
+
+    function CheckAge()
+    {
+        let age="";
+
+        if(document.getElementById("under").checked)
+                age="unter 18"
+        else if (document.getElementById("over").checked)
+                age="18 oder älter"
+
+        return age;
+    }
+
+    function CheckName(name)
+    {
+        let allowedChars = /^[0-9a-zA-Z]+$/;
+
+        if(name.match(allowedChars)) 
+            return true;
+        else
+        return false; 
+  }
+
+    </script>
+
+<style>
+    *,
+    html {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    html {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background-color: rgb(236, 152, 42);
+    }
+
+    .main {
+        width: 100%;
+        height: 90%;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        text-align: left;
+        margin-left: 20px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+
+    .btn{
+      background-color: white;  
+    }
+    label{
+        margin-top: 10px;
+    }
+
+</style>
